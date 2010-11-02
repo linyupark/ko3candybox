@@ -1,0 +1,25 @@
+<style type="text/css">
+#candy-calender{ width: 217px; }
+#candy-calender .weeks b{ background: #eee; text-align: center; height: 24px; border-bottom: 1px solid #ccc; width: 30px; display: block; float: left }
+#candy-calender .days div{ width: 30px; float: left; text-align: center; }
+</style>
+<div id="candy-calender">
+    <div class="weeks">
+        <b>日</b>
+        <b>一</b>
+        <b>二</b>
+        <b>三</b>
+        <b>四</b>
+        <b>五</b>
+        <b>六</b>
+    </div>
+    <div class="days">
+        <?php for($i=0;$i<$start_at;$i++): ?>
+        <div class="empty">&nbsp;</div>
+        <?php endfor; ?>
+        <?php for($d=1;$d<=$lastday;$d++): ?>
+        <div><?= $d ?></div>
+        <?php endfor; ?>
+    </div>
+    <div style="clear: both; float: none;"></div>
+</div>

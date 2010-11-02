@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>
+        <?=isset($_title)?$_title.' - ':''?>
+        <?=@$_sitename?>
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="<?=@$_keywords?>" />
+    <link rel="icon" href="<?=URL::base()?>favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?=URL::base()?>favicon.ico" type="image/x-icon" />
+    <?=Html::style('candybox/css/reset.css')?>
+    <?=Html::style('candybox/css/class.css')?>
+    <?=@$_head?>
+</head>
+<body id="container">
+    <div id="wrap">
+        <div id="header">
+            <?=@$_header?>
+            <?=@$_header_2?>
+            <?=@$_header_3?>
+            <div class="candy-clear"></div>
+        </div>
+        <div id="body">
+            <?=@$_body?>
+            <?=@$_body_2?>
+            <?=@$_body_3?>
+            <?=@$_body_4?>
+            <?=@$_body_5?>
+            <div class="candy-clear"></div>
+        </div>
+        <div id="footer">
+            <?=@$_footer?>
+            <?=@$_footer_2?>
+            <?=@$_footer_3?>
+            <div class="candy-clear"></div>
+        </div>
+
+        <?php if(isset($_debug)): ?>
+        <div id="debug" class="candy-debug">
+            <?=$_debug?>
+        </div>
+        <?php endif; ?>
+    </div>
+</body>
+</html>

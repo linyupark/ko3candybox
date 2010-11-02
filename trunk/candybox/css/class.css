@@ -1,0 +1,117 @@
+/* 文字对齐类 */
+.candy-tac{
+    text-align: center;
+} .candy-tal{
+    text-align: left;
+} .candy-tar{
+    text-align: right;
+} .candy-vam{
+    vertical-align: middle;
+}
+
+/* 清除浮动多余占位类 */
+.candy-clear{
+    float: none;
+    clear: both;
+}
+
+.candy-fl{
+    float: left;
+} .candy-fr{
+    float: right;
+}
+
+/* 隐藏类 */
+.candy-hide{
+    display: none;
+}
+
+/* 字类 */
+.candy-small{
+    font-size: 12px;
+} .candy-bold{
+    font-weight: bold;
+} .candy-thin{
+    font-weight: lighter;
+}
+
+/* 空间设定类 */
+.candy-mla a{
+    margin-left: 8px;
+} .candy-mra a{
+    margin-right: 8px;
+}
+
+.candy-pd8{
+    padding: 8px;
+} .candy-plt8{
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+.candy-pd18{
+    padding: 8px;
+} .candy-plt18{
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+/* 颜色类 */
+.candy-quiet{
+    color: #666;
+}
+
+/* 信息显示类 */
+.candy-error,
+.candy-notice,
+.candy-success{
+    padding:8px;
+    border:1px solid #ddd;
+}
+.candy-error a,
+.candy-notice a,
+.candy-success a{
+    margin:0 3px;
+    background:none;
+}
+.candy-error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+.candy-notice {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+.candy-success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
+.candy-error a {color:#8a1f11;}
+.candy-notice a {color:#514721;}
+.candy-success a {color:#264409;}
+
+.candy-debug{
+    background: #000; color: #ccc; line-height: 150%;
+    padding: 20px; margin: 10px 0 0 0;
+    margin-bottom: 20px;
+    border: 2px solid #999;
+    overflow: auto;
+} .candy-debug h1{
+    margin: -20px;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    background: #999;
+    color: #000;
+} .candy-debug i{
+    text-align: right;
+    display: block;
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+} .candy-debug small{
+    font-weight: bold; color: #fff; font-size: 14px;
+} .candy-debug span{
+}
+
+/* css3 */
+.candy-corner8{
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+}
+.candy-txtsd{
+    text-shadow: 0px 1px 1px #333;
+}
+.candy-boxsd{
+    -moz-box-shadow:0 0 5px #999;
+    -webkit-box-shadow:0 0 5px #999;
+}
