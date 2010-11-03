@@ -2,7 +2,7 @@
 
 class Preload_Global extends Candy_Controller
 {
-    public $template = 'layout/global';
+    public $template = 'layout/pc/g';
 
     public function before()
     {
