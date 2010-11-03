@@ -167,15 +167,12 @@ class Candy_Controller extends Kohana_Controller_Template
     /**
      * 渲染模板
      * @param <type> $position
+     * @param <type> $path
      * @param <type> $params
-     * @param <type> $app
      */
-    function _render($position, $params=null, $app=null)
+    function _render($position, $path, $params=null)
     {
-        $request = $this->request;
-        $app_name = $app ? $app : $request->directory;
-        $view_file = $request->controller.'_'.$request->action;
-        $this->template->$position = View::factory($app_name.'/'.$view_file, $params);
+        $this->template->$position = View::factory($path, $params);
     }
 
     /**
