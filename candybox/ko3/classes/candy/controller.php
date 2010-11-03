@@ -2,9 +2,13 @@
 
 class Candy_Controller extends Kohana_Controller_Template
 {
-    private $_flash_msg_key = 'candy_flash_msg';
     public $template = 'layout/xhtml10t';
+
     protected $_sess;
+    protected $_role;
+    protected $_acl;
+    protected $_resource;
+    protected $_flash_msg_key = 'candy_flash_msg';
 
     // REQUEST PRELOAD
     function before()
@@ -26,10 +30,11 @@ class Candy_Controller extends Kohana_Controller_Template
 
         // REQEUST SET
         $request = $this->request;
+        View::set_global('_D', $request->directory);
         View::set_global('_C', $request->controller);
         View::set_global('_A', $request->action);
         View::set_global('_URI', $request->uri);
-        View::set_global('_URL', URL::site($request->uri).URL::query());
+        View::set_global('_URL', $request->url());
 
         // FLASH MESSAGE
         $flash_msg = $this->_sess->get($this->_flash_msg_key);
@@ -40,8 +45,24 @@ class Candy_Controller extends Kohana_Controller_Template
     }
 
     /**
+     * 使用 acl
+     * @param <type> $default_role
+     */
+    function _acl($default_role='guest')
+    {
+        $request = $this->request;
+
+        $this->_acl = new ACL();
+        $this->_acl->add_role($default_role);
+        $this->_role = $this->_sess->get('_role', $default_role);
+        $this->_resource = $request->directory.'_'.$request->controller;
+        $this->_acl->add_resource($this->_resource);
+        $this->_acl->allow($this->_role, $this->_resource, $request->action);
+    }
+
+    /**
      * 设置语言类型
-     * @param <type> $lang 
+     * @param <type> $lang
      */
     function _i18n($lang='zh-cn')
     {
@@ -59,7 +80,7 @@ class Candy_Controller extends Kohana_Controller_Template
 
     /**
      * 重定向简写
-     * @param <type> $url 
+     * @param <type> $url
      */
     function _redirect($url)
     {
@@ -121,7 +142,7 @@ class Candy_Controller extends Kohana_Controller_Template
 
     /**
      * 改变主题
-     * @param <type> $theme_name 
+     * @param <type> $theme_name
      */
     function _theme($theme_name)
     {
@@ -132,7 +153,7 @@ class Candy_Controller extends Kohana_Controller_Template
 
     /**
      * 加入页面关键字描述
-     * @param <type> $string 
+     * @param <type> $string
      */
     function _keywords($string)
     {
@@ -147,7 +168,7 @@ class Candy_Controller extends Kohana_Controller_Template
      * 渲染模板
      * @param <type> $position
      * @param <type> $app
-     * @param <type> $params 
+     * @param <type> $params
      */
     function _render($position, $app, $params=null)
     {
@@ -164,7 +185,7 @@ class Candy_Controller extends Kohana_Controller_Template
         $variables = func_get_args();
 
         $output = Kohana::debug($variables);
-        
+
         if(isset($this->template->_debug)){
             $this->template->_debug .= $output;
         } else {

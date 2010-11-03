@@ -30,15 +30,9 @@ class Candy_Ko3 {
     }
 
     public static function route() {
-        Route::set('default', '(<controller>(/<action>(/<id>)))')
+        Route::set('default', '(<directory>(/<controller>(/<action>(/<id>))))')
                 ->defaults(array(
-                'controller' => 'index',
-                'action'     => 'index',
-        ));
-
-        Route::set('section', '(<directory>(/<controller>(/<action>(/<id>))))')
-                ->defaults(array(
-                'directory'  => 'apps',
+                'directory'  => 'home',
                 'controller' => 'index',
                 'action'     => 'index',
         ));
