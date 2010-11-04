@@ -1,7 +1,17 @@
 <?php if(isset($_FLASH)): ?>
-<div id="candy-flashmsg">
+<div class="candy-flashmsg">
 <?php foreach($_FLASH as $msg): ?>
-    <span class="<?= $msg['class'] ?>"><?= $msg['content'] ?></span>
+    <div class="<?= $msg['class'] ?>">
+        <?php if(is_array($msg['content'])): ?>
+        <ul>
+            <?php foreach($msg['content'] as $content): ?>
+            <li><?= $content ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php else: ?>
+            <?= $msg['content'] ?>
+        <?php endif; ?>
+    </div>
 <?php endforeach; ?>
 </div>
 <?php endif; ?>
