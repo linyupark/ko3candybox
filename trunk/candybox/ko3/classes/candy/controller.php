@@ -88,6 +88,14 @@ class Candy_Controller extends Kohana_Controller_Template
     }
 
     /**
+     * 刷新当前地址
+     */
+    function _refresh()
+    {
+        $this->request->redirect($this->request->url());
+    }
+
+    /**
      * 等效 Kohana::config
      * @param <type> $group
      * @return <type>
