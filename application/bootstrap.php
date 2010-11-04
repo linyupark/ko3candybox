@@ -60,6 +60,7 @@ if (isset($_ENV['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/',
+        'index_file' => ''
 ));
 
 /**
@@ -93,11 +94,7 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-Route::set('default', '(<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'controller' => 'root',
-		'action'     => 'index',
-	));
+Candy_Ko3::route();
 
 if ( ! defined('SUPPRESS_REQUEST'))
 {
