@@ -8,7 +8,7 @@ class Candy_Controller extends Kohana_Controller_Template
     protected $_role;
     protected $_acl;
     protected $_resource;
-    protected $_flash_msg_key = 'candy_flash_msg';
+    protected $_flash_msgs = array();
 
     // REQUEST PRELOAD
     function before()
@@ -37,10 +37,10 @@ class Candy_Controller extends Kohana_Controller_Template
         View::set_global('_URL', $request->url());
 
         // FLASH MESSAGE
-        $flash_msg = $this->_sess->get($this->_flash_msg_key);
-        if($flash_msg){
-            View::set_global('_FLASH', $flash_msg);
-            $this->_sess->delete($this->_flash_msg_key);
+        $flash_msgs = $this->_sess->get('candy_flash_msgs');
+        if(count($flash_msgs) > 0){
+            View::set_global('_FLASH', $flash_msgs);
+            $this->_sess->delete('candy_flash_msgs');
         }
     }
 
@@ -204,10 +204,12 @@ class Candy_Controller extends Kohana_Controller_Template
      */
     function _flash($string, $class='candy-notice')
     {
-        $this->_sess->set($this->_flash_msg_key, array(
+        $this->_flash_msgs[] = array(
             'class' => $class,
-            'msg' => $string,
-        ));
+            'content' => $string,
+        );
+
+        $this->_sess->set('candy_flash_msgs', $this->_flash_msgs);
     }
 
     function after()
