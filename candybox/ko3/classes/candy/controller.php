@@ -19,7 +19,6 @@ class Candy_Controller extends Kohana_Controller_Template
         if(Request::$is_ajax){
             $this->auto_render = false;
         }
-
         // LANG SET
         $this->_i18n();
 
@@ -41,6 +40,23 @@ class Candy_Controller extends Kohana_Controller_Template
         if(count($flash_msgs) > 0){
             View::set_global('_FLASH', $flash_msgs);
             $this->_sess->delete('candy_flash_msgs');
+        }
+
+        // SET FORM DATA
+        if(Cookie::get($request->uri)){
+            $data = unserialize(Cookie::get($request->uri));
+            View::set_global('_FORM', $data);
+        }
+    }
+
+    /**
+     * 保存表单的内容
+     */
+    function _save_post_form()
+    {
+        if($_POST){
+            $data = serialize($_POST);
+            Cookie::set($this->request->uri, $data);
         }
     }
 
