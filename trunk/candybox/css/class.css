@@ -62,11 +62,19 @@
 }
 
 /* 信息显示类 */
+.candy-flashmsg{
+    padding: 10px 0;
+} .candy-flashmsg ul{
+    list-style-type: square;
+    list-style-position: inside;
+}
+
 .candy-error,
 .candy-notice,
 .candy-success{
     padding:8px;
     border:1px solid #ddd;
+    margin-bottom: 5px;
 }
 .candy-error a,
 .candy-notice a,
