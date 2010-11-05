@@ -25,6 +25,10 @@ class Candy_Doctrine
                 spl_autoload_register(array('Doctrine_Core','autoload'));
                 self::$_doctrined = 'normal';
             }
+            // 基础设置
+            $manager = Doctrine_Manager::getInstance();
+            $manager->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, 1);
+            $manager->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, 1);
         }
     }
 
@@ -45,17 +49,29 @@ class Candy_Doctrine
      * @param <type> $charset default = utf8
      * @return <type> connection
      */
-    public static function conn($db_uri, $conn_name, $charset='utf8')
+    public static function conn($config='db')
     {
         self::init();
-        $manager = Doctrine_Manager::getInstance();
-        $manager->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, 1);
-        $manager->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, 1);
 
-        $db_conn = Doctrine_Manager::connection($db_uri, $conn_name);
-        $db_conn->setCharset($charset);
-        self::$_db[$conn_name] = $db_conn;
-        return $db_conn;
+        // 获取设置信息
+        $db_info = Kohana::config($config);
+
+        try{
+            $conns = $db_info['connections'];
+            foreach($conns as $conn_name => $db){
+                $conn = Doctrine_Manager::connection($db['uri'], $conn_name);
+                $conn->setCharset($db['charset']);
+                self::$_db[$conn_name] = $conn;
+            }
+            if($db_info['cache'] == TRUE){
+                self::cache();
+            }
+        } catch (Exception $e) {
+            throw new Exception("
+                candy doctrine connection config file is not correct.
+                please check apppath/config/{$config} is exists.
+            ");
+        }
     }
 
     /**
