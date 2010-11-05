@@ -5,7 +5,6 @@ class Candy_Controller extends Kohana_Controller_Template
     public $template = 'layout/xhtml10t';
 
     protected $_sess;
-    protected $_role;
     protected $_acl;
     protected $_resource;
     protected $_flash_msgs = array();
@@ -70,10 +69,35 @@ class Candy_Controller extends Kohana_Controller_Template
 
         $this->_acl = new ACL();
         $this->_acl->add_role($default_role);
-        $this->_role = $this->_sess->get('_role', $default_role);
+        $role = $this->_role($default_role, false);
         $this->_resource = $request->directory.'_'.$request->controller;
         $this->_acl->add_resource($this->_resource);
-        $this->_acl->allow($this->_role, $this->_resource, $request->action);
+        $this->_acl->allow($role, $this->_resource, $request->action);
+    }
+
+    /**
+     * 设置或者获取 role
+     * @param <type> $role
+     * @param <type> $force
+     * @return <type>
+     */
+    function _role($role=null, $force=true)
+    {
+        $_role = $this->_sess->get('_role');
+
+        // 设置默认的role
+        if( ! $_role && $role){
+            $this->_sess->set('_role', $role);
+            return $role;
+        }
+
+        // 强制替换
+        if($_role && $role && $force){
+            $this->_sess->set('_role', $role);
+            return $role;
+        }
+
+        return $_role;
     }
 
     /**
