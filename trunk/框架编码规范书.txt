@@ -1,0 +1,27 @@
+视图规则：
+1、文件结构
+-views
+    -layout(全局使用的布局)
+        -pc(默认电脑界面布局)
+            g.phtml(默认全局使用的布局文件 如要再添加则可根据controller preload中的layout来更改名称)
+            g_header.phtml(可选)
+            g_footer.phtml(可选)
+            g_script.phtml(可选)
+        -mb(手机布局)
+            。。。。同上
+        -v1,v2,v3...(按版布局)
+
+    -pc,mb,v1,v2,v3...(app使用的view目录，对应layout的子目录)
+        -account(功能模块名称作为第一层子目录)
+            login.phtml(对应action的view)
+
+2、view内部的元素命名(通常情况下)
+如controler-action为(account-login)，那么对应的view中就嵌套一层div，且id="account-login"
+
+3、视图样式存放
+使用candy controller的$this->_theme($主题名)后，必须在/static/themes/目录中建立结构为：
+-主题名
+    -img
+    主题名.css
+    主题名.js
+所有样式全部放入主题名.css中，全局样式放置顶部，每个view的id对应样式写在底部，随着应用的增加而增加
