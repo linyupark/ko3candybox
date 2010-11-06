@@ -224,6 +224,24 @@ class Candy_Controller extends Kohana_Controller_Template
     }
 
     /**
+     * 增加一层渲染
+     * @param <type> $top_or_bottom
+     * @param <type> $position
+     * @param <type> $path
+     * @param <type> $params 
+     */
+    function _render_add($top_or_bottom, $position, $path, $params=null)
+    {
+        if($top_or_bottom == 'top'){
+            $this->template->$position = View::factory($path, $params).
+                                                               $this->template->$position;
+        }
+        if($top_or_bottom == 'bottom'){
+            $this->template->$position .= View::factory($path, $params);
+        }
+    }
+
+    /**
      * controller 输出 debug 信息
      */
     function _debug()
