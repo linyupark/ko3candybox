@@ -233,8 +233,7 @@ class Candy_Controller extends Kohana_Controller_Template
     function _render_add($top_or_bottom, $position, $path, $params=null)
     {
         if($top_or_bottom == 'top'){
-            $this->template->$position = View::factory($path, $params).
-                                                               $this->template->$position;
+            $this->template->$position = View::factory($path, $params).$this->template->$position;
         }
         if($top_or_bottom == 'bottom'){
             $this->template->$position .= View::factory($path, $params);
