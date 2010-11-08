@@ -9,15 +9,15 @@ class Candy_Swift
     protected static $_mailer;
 
     /**
-     * é‚®ä»¶åŠŸèƒ½åˆå§‹åŒ–
-     * @param <type> $mailer 
+     * ÓÊ¼ş¹¦ÄÜ³õÊ¼»¯
+     * @param <type> $mailer
      */
     public static function init($mailer)
     {
         require_once CANDYPATH.'Swift/swift_required.php';
 
         self::$_mailer = $mailer;
-        
+
         $config = Kohana::config('mailer.'.$mailer);
         self::$_config = $config;
 
@@ -34,17 +34,17 @@ class Candy_Swift
     }
 
     /**
-     * å‘é€htmlæ ¼å¼çš„é‚®ä»¶
+     * ·¢ËÍhtml¸ñÊ½µÄÓÊ¼ş
      * @param <type> $mailer config key
-     * @param array $from é‚®ç®±åœ°å€ => å‘ä»¶äºº
-     * @param array $to é‚®ä»¶åœ°å€ => æ”¶ä»¶äºº
-     * @param <type> $subject æ ‡é¢˜
-     * @param <type> $body å†…å®¹
+     * @param array $from ÓÊÏäµØÖ· => ·¢¼şÈË
+     * @param array $to ÓÊ¼şµØÖ· => ÊÕ¼şÈË
+     * @param <type> $subject ±êÌâ
+     * @param <type> $body ÄÚÈİ
      */
     public static function sendhtml($mailer, array $from, array $to, $subject, $body)
     {
         self::init($mailer);
-        
+
         $message = Swift_Message::newInstance()
                     ->setSubject($subject)
                     ->setFrom($from)
