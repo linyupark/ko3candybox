@@ -1,6 +1,6 @@
 <?php
 
-# Ò»Ğ©Â·¾¶µÄ¶¨Òå
+# ä¸€äº›è·¯å¾„çš„å®šä¹‰
 defined('CANDYPATH') OR define('CANDYPATH', DOCROOT.'candybox/');
 define('DOCTRINEPATH', CANDYPATH.'Doctrine/');
 define('ORMPATH', APPPATH.'orm/');
@@ -11,7 +11,7 @@ class Candy_Doctrine
     public static $_doctrined;
 
     /**
-     * ³õÊ¼»¯¹¤×÷£¬¿ÉÒÔ²»ÊÖ¶¯Ö´ĞĞ
+     * åˆå§‹åŒ–å·¥ä½œï¼Œå¯ä»¥ä¸æ‰‹åŠ¨æ‰§è¡Œ
      */
     public static function init()
     {
@@ -25,7 +25,7 @@ class Candy_Doctrine
                 spl_autoload_register(array('Doctrine_Core','autoload'));
                 self::$_doctrined = 'normal';
             }
-            // »ù´¡ÉèÖÃ
+            // åŸºç¡€è®¾ç½®
             $manager = Doctrine_Manager::getInstance();
             $manager->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, 1);
             $manager->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, 1);
@@ -33,7 +33,7 @@ class Candy_Doctrine
     }
 
     /**
-     * ±àÒë doctrine ³Éµ¥ÎÄ¼ş
+     * ç¼–è¯‘ doctrine æˆå•æ–‡ä»¶
      * @param <type> $drivers
      */
     public static function compile($drivers=array('mysql','sqlite'))
@@ -43,7 +43,7 @@ class Candy_Doctrine
     }
 
     /**
-     * µ÷ÓÃdoctrine´´½¨Ò»¸öÊı¾İ¿âÁ¬½Ó
+     * è°ƒç”¨doctrineåˆ›å»ºä¸€ä¸ªæ•°æ®åº“è¿æ¥
      * @param <type> $db_uri mysql://user:pass@where/dbname
      * @param <type> $conn_name unique name
      * @param <type> $charset default = utf8
@@ -53,7 +53,7 @@ class Candy_Doctrine
     {
         self::init();
 
-        // »ñÈ¡ÉèÖÃĞÅÏ¢
+        // è·å–è®¾ç½®ä¿¡æ¯
         $db_info = Kohana::config($config);
 
         try{
@@ -75,7 +75,7 @@ class Candy_Doctrine
     }
 
     /**
-     * Ê¹ÓÃ result sqlite cache ÒÔ¼° query apc cache
+     * ä½¿ç”¨ result sqlite cache ä»¥åŠ query apc cache
      */
     public static function cache()
     {
@@ -92,7 +92,7 @@ class Candy_Doctrine
     }
 
     /**
-     * ¸ù¾İµ±Ç°µÄÊı¾İ¿âÉú³Émodel
+     * æ ¹æ®å½“å‰çš„æ•°æ®åº“ç”Ÿæˆmodel
      * @param <array> $conns
      */
     public static function db2model($conns, $path=null)
@@ -103,7 +103,7 @@ class Candy_Doctrine
     }
 
     /**
-     * ÊÖ¶¯¼ÓÔØĞèÒªµÄ model
+     * æ‰‹åŠ¨åŠ è½½éœ€è¦çš„ model
      * @param <array> $models
      */
     public static function loadModel(array $models)

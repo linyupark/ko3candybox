@@ -9,7 +9,7 @@ class Candy_Swift
     protected static $_mailer;
 
     /**
-     * ÓÊ¼ş¹¦ÄÜ³õÊ¼»¯
+     * é‚®ä»¶åŠŸèƒ½åˆå§‹åŒ–
      * @param <type> $mailer
      */
     public static function init($mailer)
@@ -34,12 +34,12 @@ class Candy_Swift
     }
 
     /**
-     * ·¢ËÍhtml¸ñÊ½µÄÓÊ¼ş
+     * å‘é€htmlæ ¼å¼çš„é‚®ä»¶
      * @param <type> $mailer config key
-     * @param array $from ÓÊÏäµØÖ· => ·¢¼şÈË
-     * @param array $to ÓÊ¼şµØÖ· => ÊÕ¼şÈË
-     * @param <type> $subject ±êÌâ
-     * @param <type> $body ÄÚÈİ
+     * @param array $from é‚®ç®±åœ°å€ => å‘ä»¶äºº
+     * @param array $to é‚®ä»¶åœ°å€ => æ”¶ä»¶äºº
+     * @param <type> $subject æ ‡é¢˜
+     * @param <type> $body å†…å®¹
      */
     public static function sendhtml($mailer, array $from, array $to, $subject, $body)
     {
