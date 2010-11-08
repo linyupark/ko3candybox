@@ -1,7 +1,7 @@
 <?php
 
-# ä¸€äº›è·¯å¾„çš„å®šä¹‰
-define('CANDYPATH', DOCROOT.'candybox/');
+# Ò»Ğ©Â·¾¶µÄ¶¨Òå
+defined('CANDYPATH') OR define('CANDYPATH', DOCROOT.'candybox/');
 define('DOCTRINEPATH', CANDYPATH.'Doctrine/');
 define('ORMPATH', APPPATH.'orm/');
 
@@ -11,7 +11,7 @@ class Candy_Doctrine
     public static $_doctrined;
 
     /**
-     * åˆå§‹åŒ–å·¥ä½œï¼Œå¯ä»¥ä¸æ‰‹åŠ¨æ‰§è¡Œ
+     * ³õÊ¼»¯¹¤×÷£¬¿ÉÒÔ²»ÊÖ¶¯Ö´ĞĞ
      */
     public static function init()
     {
@@ -25,7 +25,7 @@ class Candy_Doctrine
                 spl_autoload_register(array('Doctrine_Core','autoload'));
                 self::$_doctrined = 'normal';
             }
-            // åŸºç¡€è®¾ç½®
+            // »ù´¡ÉèÖÃ
             $manager = Doctrine_Manager::getInstance();
             $manager->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, 1);
             $manager->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, 1);
@@ -33,7 +33,7 @@ class Candy_Doctrine
     }
 
     /**
-     * ç¼–è¯‘ doctrine æˆå•æ–‡ä»¶
+     * ±àÒë doctrine ³Éµ¥ÎÄ¼ş
      * @param <type> $drivers
      */
     public static function compile($drivers=array('mysql','sqlite'))
@@ -43,7 +43,7 @@ class Candy_Doctrine
     }
 
     /**
-     * è°ƒç”¨doctrineåˆ›å»ºä¸€ä¸ªæ•°æ®åº“è¿æ¥
+     * µ÷ÓÃdoctrine´´½¨Ò»¸öÊı¾İ¿âÁ¬½Ó
      * @param <type> $db_uri mysql://user:pass@where/dbname
      * @param <type> $conn_name unique name
      * @param <type> $charset default = utf8
@@ -53,7 +53,7 @@ class Candy_Doctrine
     {
         self::init();
 
-        // è·å–è®¾ç½®ä¿¡æ¯
+        // »ñÈ¡ÉèÖÃĞÅÏ¢
         $db_info = Kohana::config($config);
 
         try{
@@ -75,7 +75,7 @@ class Candy_Doctrine
     }
 
     /**
-     * ä½¿ç”¨ result sqlite cache ä»¥åŠ query apc cache
+     * Ê¹ÓÃ result sqlite cache ÒÔ¼° query apc cache
      */
     public static function cache()
     {
@@ -92,7 +92,7 @@ class Candy_Doctrine
     }
 
     /**
-     * æ ¹æ®å½“å‰çš„æ•°æ®åº“ç”Ÿæˆmodel
+     * ¸ù¾İµ±Ç°µÄÊı¾İ¿âÉú³Émodel
      * @param <array> $conns
      */
     public static function db2model($conns, $path=null)
@@ -103,10 +103,10 @@ class Candy_Doctrine
     }
 
     /**
-     * æ‰‹åŠ¨åŠ è½½éœ€è¦çš„ model
+     * ÊÖ¶¯¼ÓÔØĞèÒªµÄ model
      * @param <array> $models
      */
-    public static function loadModel($models)
+    public static function loadModel(array $models)
     {
         self::init();
         foreach($models as $model){
