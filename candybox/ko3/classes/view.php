@@ -36,6 +36,6 @@ class View extends Kohana_View {
         if(count($params) > 0){
             $_GET = $params;
         }
-        echo Request::factory($uri)->execute();
+        return Request::factory($uri)->execute();
     }
 }
