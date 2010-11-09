@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 class View extends Kohana_View {
-    
+
     /**
      * Sets the view filename.
      *
@@ -24,5 +24,18 @@ class View extends Kohana_View {
             $this->_file = $path;
 
             return $this;
+    }
+
+    /**
+     * 直接渲染 request
+     * @param <type> $uri
+     * @param <type> $params
+     */
+    static function render_request($uri, $params=array())
+    {
+        if(count($params) > 0){
+            $_GET = $params;
+        }
+        echo Request::factory($uri)->execute();
     }
 }
