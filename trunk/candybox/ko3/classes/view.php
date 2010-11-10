@@ -30,6 +30,7 @@ class View extends Kohana_View {
      * 直接渲染 request
      * @param <type> $uri
      * @param <type> $params
+     * @return <string>
      */
     static function render_request($uri, $params=array())
     {
@@ -37,5 +38,31 @@ class View extends Kohana_View {
             $_GET = $params;
         }
         return Request::factory($uri)->execute();
+    }
+
+    /**
+     * 返回链接tab
+     * @param array $links
+     * @param <type> $key
+     * @param <type> $style
+     * @return <type>
+     */
+    static function render_tab($uri, array $links, $key='tab', $style='candy-tab', $default_tab='index')
+    {
+        $view['uri'] = $uri;
+        $view['links'] = $links;
+        $view['key'] = $key;
+        $view['cur_tab'] = Arr::get($_GET, $key, $default_tab);
+        $view['style'] = $style;
+        return View::factory('addons/tab_link', $view);
+    }
+
+    /**
+     * 显示 flash message 区块
+     * @return <type>
+     */
+    static function render_flash()
+    {
+        return View::factory('addons/flash_msg');
     }
 }

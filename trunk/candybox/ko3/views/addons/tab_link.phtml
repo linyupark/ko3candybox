@@ -1,0 +1,9 @@
+<div class="<?=$style?>">
+    <?php
+        foreach($links as $link => $name):
+        $cur = ($link == $cur_tab) ? 'cur' : '';
+        $param = URL::query(array($key => $link));
+    ?>
+    <?=Html::anchor($uri.$param, $name, array('class'=>$cur))?>
+    <?php endforeach ?>
+</div>
