@@ -123,3 +123,33 @@
     -moz-box-shadow:0 0 5px #999;
     -webkit-box-shadow:0 0 5px #999;
 }
+
+/* link tab */
+.candy-tab{ overflow: hidden }
+.candy-tab a{
+    padding: 0 10px; height: 25px;
+    line-height: 200%;
+    display: block;
+    float: left;
+    background: #f5f5f5;
+} .candy-tab a:hover{
+    color: #000;
+    background: #f5f5f5;
+} .candy-tab a.cur{
+    background: #E0E5FF;
+    border-bottom: none;
+    font-weight: bold;
+}
+.candy-tab2{ overflow: hidden; background: #E0E5FF; }
+.candy-tab2 a{
+    color: #666;
+    padding: 2px 10px; height: 25px;
+    line-height: 200%;
+    display: block;
+    float: left;
+} .candy-tab2 a:hover, .candy-tab2 a.cur{
+    color: #000;
+    background: none;
+    border-bottom: none;
+    text-decoration: underline;
+} .candy-tab2 a.cur{ font-weight: bold; }
