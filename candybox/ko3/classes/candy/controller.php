@@ -31,10 +31,8 @@ class Candy_Controller extends Kohana_Controller_Template
         View::set_global('_D', $request->directory);
         View::set_global('_C', $request->controller);
         View::set_global('_A', $request->action);
-        View::set_global('_URI', $request->uri);
-        View::set_global('_URL', $request->url());
-        View::set_global('_SURI', $_SERVER['PATH_INFO']);
-        View::set_global('_SURL', $_SERVER['REQUEST_URI']);
+        View::set_global('_URI', $request->detect_uri());
+        View::set_global('_URL', $request->detect_uri().URL::query());
 
         // FLASH MESSAGE
         $flash_msgs = $this->_sess->get('candy_flash_msgs');
@@ -132,13 +130,9 @@ class Candy_Controller extends Kohana_Controller_Template
     /**
      * 刷新当前地址
      */
-    function _refresh($server=TRUE)
+    function _refresh()
     {
-        if($server){
-            $this->request->redirect($_SERVER['REQUEST_URI']);
-        }
-
-        $this->request->redirect($this->request->url());
+        $this->request->redirect($this->request->detect_uri().URL::query());
     }
 
     /**
