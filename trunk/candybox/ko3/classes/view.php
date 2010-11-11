@@ -42,18 +42,33 @@ class View extends Kohana_View {
 
     /**
      * 返回链接tab
+     * @param <type> $uri
      * @param array $links
-     * @param <type> $key
+     * @param <type> $deep_num 第几层tab
      * @param <type> $style
+     * @param <type> $default_tab
      * @return <type>
      */
-    static function render_tab($uri, array $links, $key='tab', $style='candy-tab', $default_tab='index')
+    static function render_tab($uri, array $links, $deep_num=1, $style='candy-tab', $default_tab='index')
     {
         $view['uri'] = $uri;
         $view['links'] = $links;
-        $view['key'] = $key;
-        $view['cur_tab'] = Arr::get($_GET, $key, $default_tab);
+        $view['key'] = 'tab'.$deep_num;
+        $view['cur_tab'] = Arr::get($_GET, $view['key'], $default_tab);
         $view['style'] = $style;
+
+        // 生成query
+        $query = array();
+        foreach($_GET as $key => $val){
+            if(strstr($key, 'tab')){
+                $query[$key] = $val;
+            }
+            else {
+                $query[$key] = null;
+            }
+        }
+        $view['query'] = $query;
+
         return View::factory('addons/tab_link', $view);
     }
 
