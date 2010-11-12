@@ -72,6 +72,30 @@ class View extends Kohana_View {
         return View::factory('addons/tab_link', $view);
     }
 
+    static function render_keditor($id, $attrs=array(), $init=true)
+    {
+        $base_path = 'candybox/editor/ke/';
+
+        if($init){
+            echo Html::script($base_path.'init.js');
+        }
+
+        $view['skinsPath'] = URL::base().$base_path.'skins/';
+        $view['pluginsPath'] = URL::base().$base_path.'plugins/';
+
+        if(@$attrs['allowUpload']){
+            $view['imageUploadJson'] = URL::base().$base_path.'upload_json.php';
+        }
+
+        if(@$attrs['allowFileManager']){
+            $view['fileManagerJson'] = URL::base().$base_path.'file_manager_json.php';
+        }
+
+        $view['id'] = $id;
+        $view['attrs'] = $attrs;
+        return View::factory('addons/keditor', $view);
+    }
+
     /**
      * 显示 flash message 区块
      * @return <type>
