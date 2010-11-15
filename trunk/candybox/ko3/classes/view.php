@@ -49,7 +49,7 @@ class View extends Kohana_View {
      * @param <type> $default_tab
      * @return <type>
      */
-    static function render_tab($uri, array $links, $deep_num=1, $style='candy-tab', $default_tab='index')
+    static function render_tab($uri, array $links, $deep_num=1, $style='candy-tab', $default_tab='')
     {
         $view['uri'] = $uri;
         $view['links'] = $links;
@@ -60,11 +60,16 @@ class View extends Kohana_View {
         // 生成query
         $query = array();
         foreach($_GET as $key => $val){
-            if(strstr($key, 'tab')){
-                $query[$key] = $val;
+            if( ! preg_match('/tab[1-9]/', $key)){
+                $query[$key] = null;
             }
             else {
-                $query[$key] = null;
+                $deep = (int)substr($key, -1);
+                if($deep <= $deep_num){
+                    $query[$key] = $val;
+                } else {
+                    $query[$key] = null;
+                }
             }
         }
         $view['query'] = $query;
