@@ -77,6 +77,13 @@ class View extends Kohana_View {
         return View::factory('addons/tab_link', $view);
     }
 
+    /**
+     * 渲染kindeditor
+     * @param <type> $id textarea id
+     * @param <type> $attrs ke.attrs
+     * @param <type> $init load ke js script
+     * @return <type>
+     */
     static function render_keditor($id, $attrs=array(), $init=true)
     {
         $base_path = 'candybox/editor/ke/';
