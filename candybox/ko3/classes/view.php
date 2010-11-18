@@ -37,6 +37,7 @@ class View extends Kohana_View {
         if(count($params) > 0){
             $_GET = $params;
         }
+
         return Request::factory($uri)->execute();
     }
 
@@ -44,12 +45,13 @@ class View extends Kohana_View {
      * 返回链接tab
      * @param <type> $uri
      * @param array $links
-     * @param <type> $deep_num 第几层tab
+     * @param <type> $deep_num
      * @param <type> $style
      * @param <type> $default_tab
+     * @param <type> $keep 需要保留的$_get key
      * @return <type>
      */
-    static function render_tab($uri, array $links, $deep_num=1, $style='candy-tab', $default_tab='')
+    static function render_tab($uri, array $links, $deep_num=1, $style='candy-tab', $default_tab='', $keep=array())
     {
         $view['uri'] = $uri;
         $view['links'] = $links;
@@ -60,10 +62,10 @@ class View extends Kohana_View {
         // 生成query
         $query = array();
         foreach($_GET as $key => $val){
-            if( ! preg_match('/tab[1-9]/', $key)){
+            if( ! preg_match('/tab[1-9]/', $key) AND ! in_array($key, $keep)){
                 $query[$key] = null;
             }
-            else {
+            elseif( ! in_array($key, $keep)) {
                 $deep = (int)substr($key, -1);
                 if($deep <= $deep_num){
                     $query[$key] = $val;

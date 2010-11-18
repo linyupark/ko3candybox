@@ -31,6 +31,7 @@ class Candy_Controller extends Kohana_Controller_Template
         View::set_global('_D', $request->directory);
         View::set_global('_C', $request->controller);
         View::set_global('_A', $request->action);
+        View::set_global('_rURI', $request->uri);
         View::set_global('_URI', $request->detect_uri());
         View::set_global('_URL', $request->detect_uri().URL::query());
 
