@@ -1,0 +1,12 @@
+<script type="text/javascript">
+    KE.show({
+        id: '<?= $id ?>',
+        <?php foreach($attrs as $k=>$v): ?>
+        <?=$k?>: <?= (is_integer($v) OR strstr($v, '[')) ? $v : '"'.$v.'"' ?>,
+        <?php endforeach; ?>
+        <?php if(@$imageUploadJson){ echo 'imageUploadJson : "'.$imageUploadJson.'",'; } ?>
+        <?php if(@$fileManagerJson){ echo 'fileManagerJson : "'.$fileManagerJson.'",'; } ?>
+        skinsPath: '<?= $skinsPath ?>',
+        pluginsPath: '<?= $pluginsPath ?>'
+    });
+</script>
