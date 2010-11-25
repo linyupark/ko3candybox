@@ -22,14 +22,41 @@ class Candy_Doctrine
                 self::$_doctrined = 'compiled';
             } else {
                 require_once DOCTRINEPATH.'Core.php';
-                spl_autoload_register(array('Doctrine_Core','autoload'));
+                spl_autoload_register('Doctrine_Core::autoload');
                 self::$_doctrined = 'normal';
             }
             // 基础设置
             $manager = Doctrine_Manager::getInstance();
             $manager->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, 1);
             $manager->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, 1);
+            spl_autoload_register('Candy_Doctrine::autoloadModel');
         }
+    }
+
+    /**
+     * 自动加载model以及base model
+     * @param <type> $class
+     * @return <type>
+     */
+    public static function autoloadModel($class)
+    {
+        $import = new Doctrine_Import_Schema();
+        $folder = $import->getOption('baseClassesDirectory');
+
+        $model_path = ORMPATH.$class.'.php';
+        $base_path = ORMPATH.$folder.'/'.$class.'.php';
+
+        if(file_exists($model_path)){
+            require_once $model_path;
+            return true;
+        }
+
+        if(file_exists($base_path)){
+            require_once $base_path;
+            return true;
+        }
+
+        return false;
     }
 
     /**
