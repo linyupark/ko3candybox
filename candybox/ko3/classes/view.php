@@ -27,6 +27,36 @@ class View extends Kohana_View {
     }
 
     /**
+     * 时间选择器
+     * @param <type> $name
+     * @param <type> $curdate
+     */
+    static function render_timepicker($name, $curdate=null)
+    {
+        return View::factory('addons/timepicker', compact('name', 'curdate'));
+    }
+
+    /**
+     * 时间选择器的时间格式化
+     * @param <type> $data
+     * @param <type> $name
+     * @param <type> $totime
+     * @return string
+     */
+    static function format_timepicker($data, $name, $totime=false)
+    {
+        try{
+            $date = $data[$name.'_date'].' '.$data[$name.'_h'].':'.$data[$name.'_m'];
+            if($totime){
+                return strtotime($date);
+            }
+            return $date;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    /**
      * 直接渲染 request
      * @param <type> $uri
      * @param <type> $params
