@@ -65,7 +65,9 @@ class View extends Kohana_View {
     static function render_request($uri, $params=array())
     {
         if(count($params) > 0){
-            $_GET = $params;
+            foreach($params as $k => $v){
+                $_GET[$k] = $v;
+            }
         }
 
         return Request::factory($uri)->execute();
