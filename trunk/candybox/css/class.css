@@ -50,10 +50,10 @@
 }
 
 .candy-pd18{
-    padding: 8px;
+    padding: 18px;
 } .candy-plt18{
-    padding-left: 8px;
-    padding-top: 8px;
+    padding-left: 18px;
+    padding-top: 18px;
 }
 
 /* 颜色类 */
@@ -124,32 +124,25 @@
     -webkit-box-shadow:0 0 5px #999;
 }
 
-/* link tab */
-.candy-tab{ overflow: hidden }
-.candy-tab a{
-    padding: 0 10px; height: 25px;
-    line-height: 200%;
-    display: block;
-    float: left;
-    background: #f5f5f5;
-} .candy-tab a:hover{
-    color: #000;
-    background: #f5f5f5;
-} .candy-tab a.cur{
-    background: #E0E5FF;
-    border-bottom: none;
+/* pagination */
+.candy-pager{
+    clear: both;
+    text-align: left;
+    font-size: 14px;
     font-weight: bold;
+    padding: 15px 0;
+    float: none;
+} .candy-pager a{
+    padding: 3px 8px;
+    background: #E6EFC2
+} .candy-pager strong{
+    padding: 3px 8px;
 }
-.candy-tab2{ overflow: hidden; background: #E0E5FF; }
-.candy-tab2 a{
-    color: #666;
-    padding: 2px 10px; height: 25px;
-    line-height: 200%;
-    display: block;
-    float: left;
-} .candy-tab2 a:hover, .candy-tab2 a.cur{
-    color: #000;
-    background: none;
-    border-bottom: none;
-    text-decoration: underline;
-} .candy-tab2 a.cur{ font-weight: bold; }
+
+
+/* 编辑器相关 */
+.wmd-preview{
+    padding: 0 0 10px 0;
+    border: 2px dotted #C6D880;
+    margin: 10px 0;
+}
