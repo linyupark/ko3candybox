@@ -18,10 +18,10 @@ class Candy_Doctrine
         if( ! self::$_doctrined){
             $compiled_file = CANDYPATH.'Doctrine.compiled.php';
             if(file_exists($compiled_file)){
-                require_once $compiled_file;
+                require $compiled_file;
                 self::$_doctrined = 'compiled';
             } else {
-                require_once DOCTRINEPATH.'Core.php';
+                require DOCTRINEPATH.'Core.php';
                 spl_autoload_register('Doctrine_Core::autoload');
                 self::$_doctrined = 'normal';
             }
@@ -47,12 +47,12 @@ class Candy_Doctrine
         $base_path = ORMPATH.$folder.'/'.$class.'.php';
 
         if(file_exists($model_path)){
-            require_once $model_path;
+            require $model_path;
             return true;
         }
 
         if(file_exists($base_path)){
-            require_once $base_path;
+            require $base_path;
             return true;
         }
 
@@ -137,8 +137,8 @@ class Candy_Doctrine
     {
         self::init();
         foreach($models as $model){
-            require_once ORMPATH.'generated/Base'.$model.'.php';
-            require_once ORMPATH.$model.'.php';
+            require ORMPATH.'generated/Base'.$model.'.php';
+            require ORMPATH.$model.'.php';
         }
     }
 }
