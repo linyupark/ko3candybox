@@ -36,16 +36,16 @@ class Candy_Controller extends Kohana_Controller_Template
         View::set_global('_URL', $request->detect_uri().URL::query());
 
         // FLASH MESSAGE
-        $flash_msgs = $this->_sess->get('candy_flash_msgs');
+        $flash_msgs = $this->_sess->get('_flash');
         if(count($flash_msgs) > 0){
             View::set_global('_FLASH', $flash_msgs);
-            $this->_sess->delete('candy_flash_msgs');
+            $this->_sess->delete('_flash');
         }
 
         // SET FORM DATA
-        if(Cookie::get($request->uri)){
-            $data = unserialize(Cookie::get($request->uri));
-            View::set_global('_FORM', $data);
+        if($this->_sess->get('_post')){
+            View::set_global('_FORM', $this->_sess->get('_post'));
+            $this->_sess->delete('_post');
         }
     }
 
@@ -55,8 +55,7 @@ class Candy_Controller extends Kohana_Controller_Template
     function _save_post_form()
     {
         if($_POST){
-            $data = serialize($_POST);
-            Cookie::set($this->request->uri, $data);
+            $this->_sess->set('_post', $_POST);
         }
     }
 
@@ -275,7 +274,19 @@ class Candy_Controller extends Kohana_Controller_Template
             'content' => $string,
         );
 
-        $this->_sess->set('candy_flash_msgs', $this->_flash_msgs);
+        $this->_sess->set('_flash', $this->_flash_msgs);
+    }
+
+    /**
+     * 强制将当前页面输出内容下载
+     * @param <type> $ofilename
+     */
+    function _resp2download($ofilename)
+    {
+        $headers['Content-Type'] = 'application/force-download';
+        $headers['Content-Disposition'] = 'inline;filename="'.$ofilename.'"';
+        $headers['Pragma'] = 'no-cache';
+        $this->request->headers = $headers;
     }
 
     function after()
