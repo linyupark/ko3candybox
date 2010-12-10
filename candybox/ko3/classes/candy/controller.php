@@ -250,17 +250,17 @@ class Candy_Controller extends Kohana_Controller_Template
 
         $output = Kohana::debug($variables);
 
-        if(isset($this->template->_debug)){
-            $this->template->_debug .= $output;
-        } else {
-            $this->template->_debug = '<h1>Debug Output:</h1>'.$output;
-        }
-
         // 执行效率输出
         $app = Profiler::application();
         $exec_sec = number_format($app['current']['time'], 5);
         $exec_mem = number_format($app['current']['memory']/(1024*1024), 5);
-        $this->template->_debug .= '<i>'.$exec_sec.'(s) / '.$exec_mem.'(m)</i>';
+        $exec_output = '<i>'.$exec_sec.'(s) / '.$exec_mem.'(m)</i>';
+
+        if(isset($this->template->_debug) AND $this->auto_render){
+            $this->template->_debug .= $output.$exec_output;
+        } else {
+            return "<div class='candy-debug'>{$output}{$exec_output}</div>";
+        }
     }
 
     /**
