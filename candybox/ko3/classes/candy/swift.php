@@ -14,7 +14,9 @@ class Candy_Swift
      */
     public static function init($mailer)
     {
-        require_once CANDYPATH.'Swift/swift_required.php';
+        if( ! self::$_mailer){
+            require_once CANDYPATH.'Swift/swift_required.php';
+        }
 
         self::$_mailer = $mailer;
 
