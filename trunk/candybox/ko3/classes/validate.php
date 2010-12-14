@@ -2,6 +2,25 @@
 
 class Validate extends Kohana_Validate
 {
+    public function as_array($withGET = FALSE)
+    {
+        $data = $this->getArrayCopy();
+
+        if($_POST){
+            foreach($_POST as $k => $v){
+                $data[$k] = isset($data[$k])?$data[$k]:$v;
+            }
+        }
+
+        if($withGET AND $_GET){
+            foreach($_GET as $k => $v){
+                $data[$k] = isset($data[$k])?$data[$k]:$v;
+            }
+        }
+
+        return $data;
+    }
+
     /**
      * 指定的key不能为空
      * @param <type> $fields array('key', 'key2, ...)
