@@ -4,6 +4,14 @@ class Date extends Kohana_Date
 {
     public static function span_str($time1, $time2 = NULL, $output = 'years,months,weeks,days,hours,minutes,seconds')
     {
+        if( ! is_numeric($time1)){
+            $time1 = strtotime($time1);
+        }
+
+        if($time2 AND ! is_numeric($time2)){
+            $time2 = strtotime($time2);
+        }
+
         $r = parent::span($time1, $time2, $output);
         foreach($r as $k => $v){
             if($v > 0){
