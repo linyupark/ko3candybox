@@ -1,0 +1,19 @@
+<?php 
+    $time = (isset($curdate) AND $curdate) ? strtotime($curdate) : @$time;
+    if( ! $time) $time = time();
+?>
+
+<input size="10" type="text" name="<?=$name?>_date" value="<?=date('Y-m-d', $time)?>" />
+
+<select name="<?=$name?>_h">
+    <?php for($h=0;$h<24;$h++): ?>
+    <option value="<?=$h?>" <?= (int)date('H', $time)==$h ? 'selected':'' ?>><?=$h < 10 ? '0'.$h : $h?></option>
+    <?php endfor; ?>
+    
+</select>
+:
+<select name="<?=$name?>_m">
+    <?php for($m=0;$m<60;$m+=5): ?>
+    <option value="<?=$m?>" <?= (($m-5) < (int)date('i', $time) AND (int)date('i', $time) < ($m+5))? 'selected':'' ?>><?=$m < 10 ? '0'.$m : $m?></option>
+    <?php endfor; ?>
+</select>
